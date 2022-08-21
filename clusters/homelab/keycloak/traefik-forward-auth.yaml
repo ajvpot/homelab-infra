@@ -1,0 +1,23 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: traefik-forward-auth
+  namespace: keycloak
+spec:
+  chart:
+    spec:
+      chart: traefik-forward-auth
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+  interval: 1m0s
+  values:
+    env:
+      COOKIE_DOMAIN: vanderpot.net
+      DEFAULT_PROVIDER: oidc
+      PROVIDERS_OIDC_CLIENT_ID: proxy
+      PROVIDERS_OIDC_CLIENT_SECRET: U8LrQNTJv3FcG4D9sf2hnSLu71dsjo2p
+      PROVIDERS_OIDC_ISSUER_URL: https://auth.vanderpot.net/realms/master
+

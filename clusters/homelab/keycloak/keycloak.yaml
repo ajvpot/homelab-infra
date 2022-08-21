@@ -1,0 +1,24 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: keycloak
+  namespace: keycloak
+spec:
+  chart:
+    spec:
+      chart: keycloak
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+  interval: 1m0s
+  values:
+    auth:
+      adminPassword: changeme
+    ingress:
+      enabled: true
+      hostname: auth.vanderpot.net
+    service:
+      type: ClusterIP
+
